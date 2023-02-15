@@ -66,17 +66,11 @@ function game() {
     
    return;
 }
-//Assign var to event listener
-const btnR = document.querySelector('#btnR');
-const btnP = document.querySelector('#btnP');
-const btnS = document.querySelector('#btnS');
 
-btnR.addEventListener('click', () => {
-    playRound('rock', getComputerChoice());
-});
-btnP.addEventListener('click', () => {
-    playRound('paper', getComputerChoice());
-});
-btnS.addEventListener('click', () => {
-    playRound('scissors', getComputerChoice());
-});
+const buttons = document.querySelectorAll('.selection');
+buttons.forEach((button) => {
+    selection = button.textContent;
+    button.addEventListener('click', () => {
+        playRound(selection, getComputerChoice());
+    });
+})
