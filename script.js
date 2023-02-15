@@ -1,3 +1,4 @@
+
 //get random number between 2 numbers
 function getRandomInt(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -63,9 +64,19 @@ function playRound(playerSelection, computerSelection){
 
 function game() {
     
-    for (let i = 1; i <= 5; i++){
-        let userChoice = prompt("Rock, Paper, Scissors...Shoot!");
-        playRound(userChoice, getComputerChoice());
-    }
+   return;
 }
-game()
+//Assign var to event listener
+const btnR = document.querySelector('#btnR');
+const btnP = document.querySelector('#btnP');
+const btnS = document.querySelector('#btnS');
+
+btnR.addEventListener('click', () => {
+    playRound('rock', getComputerChoice());
+});
+btnP.addEventListener('click', () => {
+    playRound('paper', getComputerChoice());
+});
+btnS.addEventListener('click', () => {
+    playRound('scissors', getComputerChoice());
+});
