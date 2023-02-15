@@ -7,11 +7,19 @@
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-    <h1  class="title">Rock, Paper, Scissors, SHOOT!</h1>
-    <h3 class="buttons-title">Select Your Weapon</h3>
-    <button class="selection" id="btnR">Rock</button>
-    <button class="selection" id="btnP">Paper</button>
-    <button class="selection" id="btnS">Scissors</button>
+    <div class="header">
+        <h1 class="title">Rock, Paper, Scissors, SHOOT!</h1>
+        <h3 class="player-score scores">Player Score: 0</h3>
+        <h3 class="computer-score scores">Computer Score: 0</h3>
+    </div>
+    <div class="btn-container">
+        <h5 class="buttons-title">Select Your Weapon</h5>
+        <button class="selection" id="btnR">Rock</button>
+        <button class="selection" id="btnP">Paper</button>
+        <button class="selection" id="btnS">Scissors</button>
+    </div>
+    <p class="result-msg"></p>
+    <button class="reset">New Game</button>
 </body>
 <script src="./script.js"></script>
 </html>

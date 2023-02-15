@@ -1,3 +1,14 @@
+let playerScore = 0;
+let computerScore = 0;
+
+const buttons = document.querySelectorAll('.selection');
+const result = document.querySelector('.result-msg');
+const playerText = document.querySelector('.player-score');
+const computerText = document.querySelector('.computer-score');
+const newGameBtn = document.querySelector('.reset');
+const gameOver = document.createElement('h3');
+const header = document.querySelector('.header');
+const btnContainer = document.querySelector('.btn-container');
 
 //get random number between 2 numbers
 function getRandomInt(min, max){
@@ -6,7 +17,6 @@ function getRandomInt(min, max){
 
 //get a random number 1-3
 //return rock for 1, paper for 2, and scissors for 3
-
 function getComputerChoice(){
     //Code Here
     let number = getRandomInt(1,3);
@@ -26,51 +36,81 @@ function getComputerChoice(){
 //ELSE -- compare regular rock paper scissors combos
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    //console.log(computerSelection)
     if (playerSelection === computerSelection){
-        console.log("Tie!")
+        result.textContent = "Tie!";
     } else if (playerSelection === 'rock') {
         switch (computerSelection){
             case 'paper':
-                console.log("You lose! Paper beats rock!");
+                computerScore++;
+                result.textContent = "Computer Wins! Paper beats rock!";
                 break;
             case 'scissors':
-                console.log("You win! Rock beats scissors!");
+                playerScore++;
+                result.textContent = "You win! Rock beats scissors!";
                 break;
         }
     } else if (playerSelection === 'paper') {
         switch (computerSelection){
             case 'rock':
-                console.log("You win! Paper beats rock!");
+                playerScore++;
+                result.textContent = "You win! Paper beats rock!";
                 break;
             case 'scissors':
-                console.log("You lose! Scissors beats paper!");
+                computerScore++;
+                result.textContent = "Computer Wins! Scissors beats paper!";
                 break;
         }
     } else if (playerSelection === 'scissors') {
         switch (computerSelection){
             case 'rock':
-                console.log("You lose! Rock beats paper!")
+                computerScore++;
+                result.textContent = "Computer Wins! Rock beats paper!";
                 break;
             case 'paper':
-                console.log("You win! Scissors beats paper!")
+                playerScore++;
+                result.textContent = "You win! Scissors beats paper!";
                 break;
         }
     }
+
+    computerText.textContent = `Computer Score: ${computerScore}`;
+    playerText.textContent = `Player Score: ${playerScore}`;
+    if (playerScore >= 2 || computerScore >= 2){
+        // playerText.style.visibility = 'hidden';
+        // computerText.style.visibility = 'hidden';
+        // btnContainer.style.visibility = 'hidden'
+        // result.style.visibility = 'hidden';
+        buttons.forEach((button) => {
+            button.disabled = true;
+        });
+        result.textContent = 'Game Over';
+    }
 }
 
-//get user choice and store in var
-//play round with that choice and computer choice in a loop 5 times
-
-function game() {
-    
-   return;
-}
-
-const buttons = document.querySelectorAll('.selection');
-buttons.forEach((button) => {
-    selection = button.textContent;
-    button.addEventListener('click', () => {
-        playRound(selection, getComputerChoice());
+function newGame(){
+    playerScore = 0;
+    computerScore = 0;
+    playerText.textContent = `Player Score: ${playerScore}`;
+    computerText.textContent = `Computer Score: ${computerScore}`;
+    result.textContent = '';
+    buttons.forEach((button) => {
+        button.disabled = false;
     });
-})
+    play();
+}
+
+
+function play() {
+    
+    buttons.forEach((button) => {
+        selection = button.textContent;
+        button.addEventListener('click', () => {
+            playRound(selection, getComputerChoice());
+        });
+    });
+}
+
+window.onload = newGame();
+newGameBtn.addEventListener('click', () => {
+    newGame();
+});
