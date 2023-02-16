@@ -72,7 +72,19 @@ function playRound(playerSelection, computerSelection){
                 break;
         }
     }
-
+    computerText.textContent = `Computer Score: ${computerScore}`;
+    playerText.textContent = `Player Score: ${playerScore}`;
+    
+    if (playerScore >= 2 || computerScore >= 2){
+        buttons.forEach((button) => {
+            button.disabled = true;
+        });
+        if(playerScore >= 2) {
+            result.textContent = 'Game Over! You Win!'
+        } else {
+            result.textContent = 'Game Over! You lose!'
+        }
+    }
 
 
 }
@@ -86,28 +98,6 @@ function newGame(){
     buttons.forEach((button) => {
         button.disabled = false;
     });
-    play();
-}
-
-
-function play() {
-    
-    buttons.forEach((button) => {
-        selection = button.textContent;
-        button.addEventListener('click', () => {
-            playRound(selection, getComputerChoice());
-        });
-
-        computerText.textContent = `Computer Score: ${computerScore}`;
-        playerText.textContent = `Player Score: ${playerScore}`;
-        
-        if (playerScore >= 2 || computerScore >= 2){
-            buttons.forEach((button) => {
-                button.disabled = true;
-            });
-            result.textContent = 'Game Over';
-        }
-    });
 }
 
 window.onload = newGame();
@@ -115,4 +105,11 @@ newGameBtn.addEventListener('click', () => {
     playerScore = 0;
     computerScore = 0;
     newGame();
+});
+
+buttons.forEach((button) => {
+    let selection = button.textContent;
+    button.addEventListener('click', () => {
+        playRound(selection, getComputerChoice());
+    });
 });
