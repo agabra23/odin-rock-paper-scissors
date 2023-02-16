@@ -73,18 +73,8 @@ function playRound(playerSelection, computerSelection){
         }
     }
 
-    computerText.textContent = `Computer Score: ${computerScore}`;
-    playerText.textContent = `Player Score: ${playerScore}`;
-    if (playerScore >= 2 || computerScore >= 2){
-        // playerText.style.visibility = 'hidden';
-        // computerText.style.visibility = 'hidden';
-        // btnContainer.style.visibility = 'hidden'
-        // result.style.visibility = 'hidden';
-        buttons.forEach((button) => {
-            button.disabled = true;
-        });
-        result.textContent = 'Game Over';
-    }
+
+
 }
 
 function newGame(){
@@ -107,10 +97,22 @@ function play() {
         button.addEventListener('click', () => {
             playRound(selection, getComputerChoice());
         });
+
+        computerText.textContent = `Computer Score: ${computerScore}`;
+        playerText.textContent = `Player Score: ${playerScore}`;
+        
+        if (playerScore >= 2 || computerScore >= 2){
+            buttons.forEach((button) => {
+                button.disabled = true;
+            });
+            result.textContent = 'Game Over';
+        }
     });
 }
 
 window.onload = newGame();
 newGameBtn.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
     newGame();
 });
